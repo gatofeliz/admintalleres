@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ServiceOrderResource extends Resource
 {
@@ -223,59 +224,51 @@ class ServiceOrderResource extends Resource
             // Agrega aquí tus filtros si es necesario
         ])
         ->actions([
-              // Acción global (para toda la tabla)
-            
+            // Acción global (para toda la tabla)
             Action::make('subirImagenes')
                 ->label('Subir Imágenes')
-                
                 ->form([
                     FileUpload::make('nuevas_imagenes')
                         ->label('Nuevas Imágenes')
-                        ->multiple() // Permitir subir varias imágenes
+                        ->multiple()
                         ->disk('public')
                         ->directory('imagenes'),
                 ]),
-                Action::make('imprimir')
+            Action::make('imprimir')
                 ->label('Imprimir')
-                ->icon('heroicon-o-printer') // Ícono de impresora
-                ->color('success') // Color verde para el botón
+                ->icon('heroicon-o-printer')
+                ->color('success')
                 ->action(function ($record) {
                     $printData = [
                         'Nombre' => $record->name,
                         'Correo Electrónico' => $record->email,
                     ];
-
                     // Pasar los datos al JavaScript
-                    $this->emit('imprimirRegistro', $printData);
+                    #$this->emit('imprimirRegistro', $printData);
                 }),
-                Action::make('WP')
-                ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
-                </svg>
-                ')
-                ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('Hola ' . $record->name . ', quiero más información.'))
-                ->openUrlInNewTab(),
-                Action::make('Vista previa PDF')
+            // Action::make('WP')
+            //     ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            //     <path strokeLinecap="round" strokeLinejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
+            //     </svg>
+            //     ')
+            //     ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('Hola ' . $record->name . ', quiero más información.'))
+            //     ->openUrlInNewTab(),
+            Action::make('Vista previa PDF')
                 ->icon('heroicon-o-printer')
                 ->label('')
-                    ->modalHeading('Vista Previa de Impresión')
-                    
-                    ->modalWidth('4xl')
-                    
-                    ->modalContent(function ($record) {
-                        $pdf = Pdf::loadView('pdf.template', ['data' => $record]);
-                        $filename = 'temp_pdf_preview.pdf';
+                ->modalHeading('Vista Previa de Impresión')
+                ->modalWidth('4xl')
+                ->modalContent(function ($record) {
+                    $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
+                    $qrCode = QrCode::size(50)->format('png')->generate('Ruta de estatus en construcción', $qrPath);
+                    Pdf::loadView('pdf.template', ['data' => $record, 'qrPath' => $qrPath])
+                        ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
+                        ->save('temp_pdf_preview.pdf');
+                    $url = sprintf('/temp_pdf_preview.pdf');
 
-                        // Guardar temporalmente el PDF
-                        Storage::disk('public')->put($filename, $pdf->output());
-
-                        // URL del archivo temporal
-                        $url = Storage::url($filename);
-
-                        // Mostrar el PDF en un iframe
-                        return view('pdf-viewer', ['url' => $url]);
-                    }),
-                Tables\Actions\EditAction::make(),
+                    return view('pdf-viewer', ['url' => $url]);
+                }),
+            Tables\Actions\EditAction::make(),
             /*Action::make('estado')
             ->label('Status')
             ->form([

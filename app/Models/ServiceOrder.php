@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TypeEquipment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class ServiceOrder extends Model
@@ -34,7 +35,7 @@ class ServiceOrder extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class,'responsibleTechnicial_id','id');
+        return $this->belongsTo(User::class, 'responsibleTechnicial_id','id');
         
     }
     public function customer()
@@ -44,5 +45,9 @@ class ServiceOrder extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+    public function typeEquipment()
+    {
+        return $this->belongsTo(TypeEquipment::class, 'type_of_equipment_id','id');
     }
 }
