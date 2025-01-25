@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Models;
 use App\Models\TypeEquipment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +42,10 @@ class ServiceOrder extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    public function model()
+    {
+        return $this->belongsTo(Models::class);
     }
     public function brand()
     {

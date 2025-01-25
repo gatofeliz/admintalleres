@@ -234,18 +234,22 @@ class ServiceOrderResource extends Resource
                         ->disk('public')
                         ->directory('imagenes'),
                 ]),
-            Action::make('imprimir')
-                ->label('Imprimir')
+            Action::make('Imprimir')
                 ->icon('heroicon-o-printer')
-                ->color('success')
-                ->action(function ($record) {
-                    $printData = [
-                        'Nombre' => $record->name,
-                        'Correo Electrónico' => $record->email,
-                    ];
-                    // Pasar los datos al JavaScript
-                    #$this->emit('imprimirRegistro', $printData);
-                }),
+                ->label('Documento')
+                ->modalHeading('Documento')
+                ->modalWidth('4xl')
+                ->modalContent(function ($record) {
+                    $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
+                    QrCode::size(50)->format('png')->generate('Ruta de estatus en construcción', $qrPath);
+                    $pdfName = sprintf('order-doc-%s.pdf', $record->code);
+                    Pdf::loadView('pdf.order', ['data' => $record, 'qrPath' => $qrPath])
+                        ->setPaper('A4', 'portrait')
+                        ->save($pdfName);
+                    $url = sprintf('/%s', $pdfName);
+
+                    return view('pdf-viewer', ['url' => $url]);
+            }),
             // Action::make('WP')
             //     ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             //     <path strokeLinecap="round" strokeLinejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
@@ -255,7 +259,7 @@ class ServiceOrderResource extends Resource
             //     ->openUrlInNewTab(),
             Action::make('Vista previa PDF')
                 ->icon('heroicon-o-printer')
-                ->label('')
+                ->label('Ticket')
                 ->modalHeading('Vista Previa de Impresión')
                 ->modalWidth('4xl')
                 ->modalContent(function ($record) {
@@ -263,7 +267,7 @@ class ServiceOrderResource extends Resource
                     $qrCode = QrCode::size(50)->format('png')->generate('Ruta de estatus en construcción', $qrPath);
                     Pdf::loadView('pdf.template', ['data' => $record, 'qrPath' => $qrPath])
                         ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
-                        ->save('temp_pdf_preview.pdf');
+                        ->save(sprintf('order-ticket-%s.pdf', $record->code));
                     $url = sprintf('/temp_pdf_preview.pdf');
 
                     return view('pdf-viewer', ['url' => $url]);
