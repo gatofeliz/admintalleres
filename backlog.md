@@ -1,6 +1,12 @@
-# Actividades realizadas
+# Backlog
 
-## En relación a los tickets
+## A realizar
+
+- Instalar filament lint
+- Cambiar etiquetas
+- Cambiar página de inicio
+
+## Realizadas
 
 - Crear un seeder para tener ejemplo real de ticket en la base de datos
     + Crear factories para los modelos
@@ -20,8 +26,5 @@
 - Se construyo el documento de la orden de servicio
 - Se creo la ruta para el estatus de la orden de servicio
 - Se agregó el campo estatus y la funcionalidad para actualizarlo directo en la lista de servicios
-
-## todo
-
-- mejorar estilos del PDF
-- roles
+- Se mejoraron los estilos del PDF del documento
+- Se instaló spatie para manejar roles y permisos

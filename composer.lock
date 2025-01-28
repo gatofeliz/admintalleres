@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14f5cb90bf21ad034ad4fddc596cd159",
+    "content-hash": "24153d75396fcbe1c2733ad8f63325f6",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5726,14 +5726,14 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "6.x-dev",
-                    "dev-master": "6.x-dev"
-                },
                 "laravel": {
                     "providers": [
                         "Spatie\\Permission\\PermissionServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-main": "6.x-dev",
+                    "dev-master": "6.x-dev"
                 }
             },
             "autoload": {

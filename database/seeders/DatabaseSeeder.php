@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\TypeEquipment;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,10 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $tech = \App\Models\User::factory()->create([
-            'name' => 'Técnico Ramirez',
-            'email' => 'test@test.com',
+        $admin = \App\Models\User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'admin',
         ]);
+        $admin->assignRole(Role::create([
+            'name' => 'admin',
+        ]));
+
+        $techRole = Role::create(['name' => 'tech']);
+        $createServicePermission = Permission::create(['name' => 'create_service_order']);
+        $techRole->givePermissionTo($createServicePermission);
+        $techUser = \App\Models\User::factory()->create([
+            'name' => 'Técnico Ramirez',
+            'email' => 'tecnico@tecnico.com',
+            'password' => 'tecnico',
+        ]);
+        $techUser->assignRole($techRole);
 
         $customer = \App\Models\Customer::factory()->create([
             'document' => '¿URL?',
@@ -40,7 +56,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\ServiceOrder::factory()->create([
             'code' => '005992',
             'date' => '11/01/2025',
-            'responsibleTechnicial_id' => $tech->id,
+            'responsibleTechnicial_id' => $techUser->id,
             'customer_id' => $customer->id,
             'imei' => '356303483084057',
             'brand_id' => $brand->id,
@@ -59,12 +75,6 @@ class DatabaseSeeder extends Seeder
             'advance' => 0,
             'total' => 15000,
             'photos' => '',
-        ]);
-
-        $admin = \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => 'admin',
         ]);
     }
 }
