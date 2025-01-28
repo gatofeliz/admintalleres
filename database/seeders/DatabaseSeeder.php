@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             'repair' => 5000,
             'advance' => 0,
             'total' => 15000,
+            'photos' => '',
         ]);
 
         $admin = \App\Models\User::factory()->create([

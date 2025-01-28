@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ServiceOrder extends Model
 {
     use HasFactory;
+
     protected $table="serviceorder";
+
     protected $fillable=[
         'code',
         'date',
@@ -32,25 +34,35 @@ class ServiceOrder extends Model
         'budget',
         'repair',
         'advance',
-        'total'
+        'total',
+        'photos',
     ];
+
+    protected $casts = [
+        'photos' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'responsibleTechnicial_id','id');
         
     }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
+
     public function model()
     {
         return $this->belongsTo(Models::class);
     }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
+
     public function typeEquipment()
     {
         return $this->belongsTo(TypeEquipment::class, 'type_of_equipment_id','id');

@@ -17,7 +17,12 @@
 - Se instaló simplesoftwareio/simple-qrcode
 - Se creo el qr code sin la ruta de estatus porque aún no existe
 - Se necesita el módulo imagemagick
+- Se construyo el documento de la orden de servicio
+- Se creo la ruta para el estatus de la orden de servicio
 
+## todo
 
-- Decidir que usar para el documento
-- Buscar la mejor heta para crear código QR
+- ligar ruta de estatus en el QR
+- agregar campos faltantes (estatus)
+- mejorar estilos del PDF
+- roles

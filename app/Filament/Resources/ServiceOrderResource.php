@@ -2,29 +2,30 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use App\Models\User;
+use Filament\Tables;
+use App\Models\Brand;
+use App\Models\Models;
+use App\Models\Customer;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\ServiceOrder;
+use App\Models\TypeEquipment;
+use Filament\Forms\Components;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
+use Infolists\Components\TextEntry;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Database\Eloquent\Builder;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ServiceOrderResource\Pages;
 use App\Filament\Resources\ServiceOrderResource\RelationManagers;
-use Filament\Tables\Filters\Filter;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Support\Facades\Storage;
-use App\Models\ServiceOrder;
-use App\Models\User;
-use App\Models\Customer;
-use App\Models\Models;
-use App\Models\Brand;
-use App\Models\TypeEquipment;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Forms\Components;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\TextColumn;
-use Barryvdh\DomPDF\Facade\Pdf;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ServiceOrderResource extends Resource
 {
@@ -138,7 +139,6 @@ class ServiceOrderResource extends Resource
                 ->label('Enciende')
                 ->searchable()
                     ])
-                
                 ,
                 Forms\Components\Select::make('blows')
                 ->options([
@@ -196,44 +196,48 @@ class ServiceOrderResource extends Resource
                     Forms\Components\TextInput::make('total')
                     ->label('Total')
                     ->required()
-                    ->maxLength(255)
-
+                    ->maxLength(255),
+            Forms\Components\FileUpload::make('photos')
+                ->image()
+                ->multiple()
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            TextColumn::make('code')
-                ->searchable()->label('Código'),
-            TextColumn::make('customer.name')
-                ->label('Cliente')->searchable(),
-            TextColumn::make('user.name')
-                ->label('Técnico')->searchable(),
-            TextColumn::make('brand.brand')
-                ->searchable()->label('Marca'),
-            TextColumn::make('')
-                ->label('')
-                ->formatStateUsing(function ($state) {
-                    return '<a href="https://wa.me/' . urlencode($state) . '" target="_blank">Contactar en WhatsApp</a>';
-                })
-                ->html(),
+            ->columns([
+                TextColumn::make('code')
+                    ->searchable()->label('Código'),
+                TextColumn::make('customer.name')
+                    ->label('Cliente')->searchable(),
+                TextColumn::make('user.name')
+                    ->label('Técnico')->searchable(),
+                TextColumn::make('brand.brand')
+                    ->searchable()->label('Marca'),
+                TextColumn::make('')
+                    ->label('')
+                    ->formatStateUsing(function ($state) {
+                        return '<a href="https://wa.me/' . urlencode($state) . '" target="_blank">Contactar en WhatsApp</a>';
+                    })
+                    ->html(),
         ])
         ->filters([
             // Agrega aquí tus filtros si es necesario
         ])
         ->actions([
-            // Acción global (para toda la tabla)
-            Action::make('subirImagenes')
-                ->label('Subir Imágenes')
-                ->form([
-                    FileUpload::make('nuevas_imagenes')
-                        ->label('Nuevas Imágenes')
-                        ->multiple()
-                        ->disk('public')
-                        ->directory('imagenes'),
-                ]),
+            Tables\Actions\Action::make('upload-photos')
+            ->label('Subir fotos')
+            ->form([
+                FileUpload::make('photos')
+                    ->label('Fotos')
+                    ->multiple()
+            ])
+            ->action(function (ServiceOrder $record, array $data) {
+                $record->update([
+                    'photos' => array_merge($data['photos'], $record->photos),
+                ]);
+            }),
             Action::make('Imprimir')
                 ->icon('heroicon-o-printer')
                 ->label('Documento')
@@ -273,6 +277,9 @@ class ServiceOrderResource extends Resource
                     return view('pdf-viewer', ['url' => $url]);
                 }),
             Tables\Actions\EditAction::make(),
+            Tables\Actions\Action::make('order-status')
+                ->label('Estatus')
+                ->url('/dashboard/service-orders/1/status'),
             /*Action::make('estado')
             ->label('Status')
             ->form([
@@ -315,43 +322,44 @@ class ServiceOrderResource extends Resource
         return [
             'index' => Pages\ListServiceOrders::route('/'),
             'create' => Pages\CreateServiceOrder::route('/create'),
-            'edit' => Pages\EditServiceOrder::route('/{record}/edit'),
+            #'edit' => Pages\EditServiceOrder::route('/{record}/edit'),
+            'status' => Pages\StatusServiceOrder::route('/{record}/status'),
         ];
     }
     protected function getFooterScripts(): array
-{
-    return [
-        <<<JS
-        document.addEventListener('alpine:init', () => {
-            window.addEventListener('imprimirRegistro', (event) => {
-                const datos = event.detail;
+    {
+        // todo: remove
+        return [
+            <<<JS
+            document.addEventListener('alpine:init', () => {
+                window.addEventListener('imprimirRegistro', (event) => {
+                    const datos = event.detail;
 
-                // Crear contenido para imprimir
-                const contenido = `
-                    <div style="font-family: Arial, sans-serif; padding: 20px;">
-                        <h1>Detalles del Registro</h1>
-                        <p><strong>Nombre:</strong> ${datos.Nombre}</p>
-                        <p><strong>Correo Electrónico:</strong> ${datos["Correo Electrónico"]}</p>
-                    </div>
-                `;
+                    // Crear contenido para imprimir
+                    const contenido = `
+                        <div style="font-family: Arial, sans-serif; padding: 20px;">
+                            <h1>Detalles del Registro</h1>
+                            <p><strong>Nombre:</strong> ${datos.Nombre}</p>
+                            <p><strong>Correo Electrónico:</strong> ${datos["Correo Electrónico"]}</p>
+                        </div>
+                    `;
 
-                // Abrir ventana de impresión
-                const ventanaImpresion = window.open('', '_blank');
-                ventanaImpresion.document.open();
-                ventanaImpresion.document.write(`
-                    <html>
-                        <head>
-                            <title>Imprimir Registro</title>
-                        </head>
-                        <body>${contenido}</body>
-                    </html>
-                `);
-                ventanaImpresion.document.close();
-                ventanaImpresion.print();
+                    // Abrir ventana de impresión
+                    const ventanaImpresion = window.open('', '_blank');
+                    ventanaImpresion.document.open();
+                    ventanaImpresion.document.write(`
+                        <html>
+                            <head>
+                                <title>Imprimir Registro</title>
+                            </head>
+                            <body>${contenido}</body>
+                        </html>
+                    `);
+                    ventanaImpresion.document.close();
+                    ventanaImpresion.print();
+                });
             });
-        });
-        JS,
-    ];
-}
-
+            JS,
+        ];
+    }
 }

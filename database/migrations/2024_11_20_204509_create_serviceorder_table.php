@@ -28,17 +28,18 @@ return new class extends Migration
             $table->string('colour');
             $table->string('password');
             $table->string('failure');
-            
             $table->string('diagnosis');
             $table->string('budget');
             $table->string('repair');
             $table->string('advance');
             $table->string('total');
+            $table->json('photos');
             $table->foreign('responsibleTechnicial_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('brand_id')->references('id')->on('brand');
             $table->foreign('model_id')->references('id')->on('models');
             $table->foreign('type_of_equipment_id')->references('id')->on('typesofequipment');
+
             $table->timestamps();
         });
     }
