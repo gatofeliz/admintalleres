@@ -39,12 +39,12 @@ class ServiceOrderResource extends Resource
             ->schema([
                 Forms\Components\Select::make('status')
                 ->options([ 
-                    'POR REPARAR',
-                    'EN ESPERA',
-                    'REPARADO',
-                    'SIN REPARACIÓN',
-                    'ENTREGADO',
-                    'ENTREGADO SIN REPARAR'
+                    'por-reparar' => 'POR REPARAR',
+                    'en-espera' => 'EN ESPERA',
+                    'reparado' => 'REPARADO',
+                    'sin-reparación' => 'SIN REPARACIÓN',
+                    'entregado' => 'ENTREGADO',
+                    'entregado-sin-reparar' => 'ENTREGADO SIN REPARAR'
                 ]),
                 Forms\Components\Grid::make(3)
                 ->schema([
@@ -251,12 +251,12 @@ class ServiceOrderResource extends Resource
                 Components\Select::make('status')
                     ->options(
                         [
-                            'POR REPARAR',
-                            'EN ESPERA',
-                            'REPARADO',
-                            'SIN REPARACIÓN',
-                            'ENTREGADO',
-                            'ENTREGADO SIN REPARAR'
+                            'por-reparar' => 'POR REPARAR',
+                            'en-espera' => 'EN ESPERA',
+                            'reparado' => 'REPARADO',
+                            'sin-reparación' => 'SIN REPARACIÓN',
+                            'entregado' => 'ENTREGADO',
+                            'entregado-sin-reparar' => 'ENTREGADO SIN REPARAR'
                         ]
                     )
                     ->required(),

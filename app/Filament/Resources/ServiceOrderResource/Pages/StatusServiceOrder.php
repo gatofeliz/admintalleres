@@ -30,6 +30,7 @@ class StatusServiceOrder extends ViewRecord implements HasTable
                 Infolists\Components\ImageEntry::make('photos')->label('Fotos'),
                 Infolists\Components\TextEntry::make('date')->label('Fecha de recepción'),
                 Infolists\Components\TextEntry::make('total')->label('Total a pagar'),
+                Infolists\Components\TextEntry::make('status')->label('Estatus'),
             ]);
     }
 
@@ -40,14 +41,15 @@ class StatusServiceOrder extends ViewRecord implements HasTable
             ->viewData($this->record->toArray())
             ->columns([
                 \Filament\Tables\Columns\TextColumn::make('code')
-                ->searchable()->label('Código'),
+                    ->label('Código'),
                 \Filament\Tables\Columns\TextColumn::make('customer.name')
-                ->label('Cliente')->searchable(),
+                    ->label('Cliente'),
                 \Filament\Tables\Columns\TextColumn::make('brand.brand')
-                ->label('Marca')->searchable(),
+                    ->label('Marca'),
                 \Filament\Tables\Columns\TextColumn::make('model.model')
-                ->label('Modelo')->searchable(),
+                    ->label('Modelo'),
             ])
+            ->paginated(false)
             ;
     }
 }
