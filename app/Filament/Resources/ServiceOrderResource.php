@@ -278,7 +278,7 @@ class ServiceOrderResource extends Resource
                 ->modalContent(function ($record) {
                     $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
                     $route = static::getUrl('status', ['record' => $record]);
-                    QrCode::size(50)->format('png')->generate($route, $qrPath);
+                    QrCode::size(100)->format('png')->generate($route, $qrPath);
                     $pdfName = sprintf('order-doc-%s.pdf', $record->code);
                     Pdf::loadView('pdf.order', ['data' => $record, 'qrPath' => $qrPath])
                         ->setPaper('A4', 'portrait')

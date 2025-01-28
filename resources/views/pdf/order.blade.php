@@ -28,13 +28,22 @@
         #order-header .column {
             float: left;
             width: 33%;
-            border: 1px solid black;
         }
 
         #order-status .column {
+            text-align: center;
+            display:block;
             float: left;
             width: 50%;
             border: 1px solid black;
+            height: 130px;
+            padding-top: 30px;
+        }
+
+        .status-box {
+            display: "table-cell";
+            vertical-align: middle;
+            height: 120px;
         }
 
         .clear {
@@ -54,12 +63,20 @@
             border-collapse: collapse;
         }
 
+        table th, table td {
+            padding: 5px;
+        }
+
+        table th {
+            background-color: rgb(204, 204, 204);
+        }
+
         #order-payment {
             margin-bottom: 10px;
         }
 
         #order-terms {
-            margin-bottom: 10px;
+            margin-bottom: 40px;
         }
 
         #order-payment p {
@@ -67,7 +84,12 @@
         }
 
         #sign {
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .eye-pick {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -78,7 +100,7 @@
             <img src="{{ public_path('/consume-ticket-logo.png') }}" height="50">
         </div>
         <div class="column" id="contact">
-            <p>CONSUME</p>
+            <p><strong>CONSUME</strong></p>
             <p>Luis Figueroa 88 Local 2</p>
             <p>Tel: 323 235 3707</p>
             <p>WhatsApp: 323 131 8462</p>
@@ -87,9 +109,9 @@
             <p>Sábado: 9:00 am - 2:00 pm</p>
         </div>
         <div class="column" id="order-id">
-            <p>ORDEN Nº {{ $data->code }}</p>
-            <p><strong>FECHA:</strong> {{$data->created_at->format('d-m-Y')}}</p>
-            <p><strong>HORA:</strong> {{$data->created_at->format('h:i:s')}}</p>
+            <p class="eye-pick">ORDEN Nº <br> {{ $data->code }}</p><br />
+            <p>FECHA: {{$data->created_at->format('d-m-Y')}}</p>
+            <p>HORA: {{$data->created_at->format('h:i:s')}}</p>
         </div>
     </div>
     <div class="clear"></div>
@@ -154,8 +176,12 @@
             </tr>
             <tr>
                 <td>
-                    Nombre: {{ $data->customer->name}}<br />
-                    Teléfono: {{$data->customer->telephone}}
+                1.- Después de 30 días de cualquier reparación no nos hacemos responsables de los equipos.<br />
+                2.- No se responde por daños ocasionados por alto voltaje, golpes, humedad y otras causas de un mal manejo del equipo.<br />
+                3.- El departamento técnico no se hace responsable por la perdida de información o datos, para tal fin el usuario debe realizar sus propias copias de seguridad.<br />
+                4.- No se responde por un sim card y memorias dejadas en los equipos.<br />
+                5.- En la reparación del equipo descrito en ésta nota acepto que tiene riesgo de ya no encender o de algún otro daño en alguno de sus componentes, razón por la cual estoy de acuerdo en que se realice y deslindo de cualquier responsabilidad civil, mercantil o judicial a CONSUME y/o cualquier personal de dicha empresa por el daño permanente en el equipo y no realizará ninguna acción legal en su contra.<br />
+                6.- No hay garantía en equipos mojados.<br />
                 </td>
             </tr>
             <tr>
@@ -170,10 +196,14 @@
     </div>
     <div id="order-status">
         <div class="column">
-            <p>Para consultar el estado de su reparación escanee el codigo QR con su móvil y sera redireccionado a la página donde podrá ver los datos de su orden de servicio.</p>
+            <div class="status-box">
+                <p>Para consultar el estado de su reparación escanee el codigo QR con su móvil y sera redireccionado a la página donde podrá ver los datos de su orden de servicio.</p>
+            </div>
         </div>
         <div class="column">
-            <img src="{{ $qrPath }}" height="100">
+            <div class="status-box">
+                <img src="{{ $qrPath }}" height="100">
+            </div>
         </div>
     </div>
 </div>
