@@ -36,7 +36,6 @@ class ServiceOrderResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        
             ->schema([
                 Forms\Components\Grid::make(3)
                 ->schema([
@@ -53,7 +52,6 @@ class ServiceOrderResource extends Resource
                     ->label('Responsable tecnico')
                     ->searchable()
                 ]),
-                
                 Forms\Components\Select::make('customer_id')
                 ->options(Customer::pluck('name', 'id'))
                 ->label('Cliente')
@@ -245,14 +243,18 @@ class ServiceOrderResource extends Resource
                 ->modalWidth('4xl')
                 ->modalContent(function ($record) {
                     $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
-                    QrCode::size(50)->format('png')->generate('Ruta de estatus en construcción', $qrPath);
+                    $route = static::getUrl('status', ['record' => $record]);
+                    QrCode::size(50)->format('png')->generate($route, $qrPath);
                     $pdfName = sprintf('order-doc-%s.pdf', $record->code);
                     Pdf::loadView('pdf.order', ['data' => $record, 'qrPath' => $qrPath])
                         ->setPaper('A4', 'portrait')
                         ->save($pdfName);
                     $url = sprintf('/%s', $pdfName);
-
-                    return view('pdf-viewer', ['url' => $url]);
+                    var_dump($qrPath);
+                    return view('pdf-viewer', [
+                        'url' => $url,
+                        'qrPath' => $qrPath,
+                    ]);
             }),
             // Action::make('WP')
             //     ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -261,18 +263,20 @@ class ServiceOrderResource extends Resource
             //     ')
             //     ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('Hola ' . $record->name . ', quiero más información.'))
             //     ->openUrlInNewTab(),
-            Action::make('Vista previa PDF')
+            Action::make('ticket')
                 ->icon('heroicon-o-printer')
                 ->label('Ticket')
-                ->modalHeading('Vista Previa de Impresión')
+                ->modalHeading('Vista Previa')
                 ->modalWidth('4xl')
                 ->modalContent(function ($record) {
                     $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
-                    $qrCode = QrCode::size(50)->format('png')->generate('Ruta de estatus en construcción', $qrPath);
+                    $route = static::getUrl('status', ['record' => $record]);
+                    $qrCode = QrCode::size(100)->format('png')->generate($route, $qrPath);
+                    $pdfName = sprintf('order-ticket-%s.pdf', $record->code);
                     Pdf::loadView('pdf.template', ['data' => $record, 'qrPath' => $qrPath])
                         ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
-                        ->save(sprintf('order-ticket-%s.pdf', $record->code));
-                    $url = sprintf('/temp_pdf_preview.pdf');
+                        ->save($pdfName);
+                    $url = sprintf('/%s', $pdfName);
 
                     return view('pdf-viewer', ['url' => $url]);
                 }),
@@ -322,7 +326,6 @@ class ServiceOrderResource extends Resource
         return [
             'index' => Pages\ListServiceOrders::route('/'),
             'create' => Pages\CreateServiceOrder::route('/create'),
-            #'edit' => Pages\EditServiceOrder::route('/{record}/edit'),
             'status' => Pages\StatusServiceOrder::route('/{record}/status'),
         ];
     }

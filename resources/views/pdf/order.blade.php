@@ -173,7 +173,7 @@
             <p>Para consultar el estado de su reparación escanee el codigo QR con su móvil y sera redireccionado a la página donde podrá ver los datos de su orden de servicio.</p>
         </div>
         <div class="column">
-            <img src="{{$data->qrPath}}" height="100">
+            <img src="{{ $qrPath }}" height="100">
         </div>
     </div>
 </div>
