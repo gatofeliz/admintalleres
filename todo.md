@@ -19,10 +19,9 @@
 - Se necesita el módulo imagemagick
 - Se construyo el documento de la orden de servicio
 - Se creo la ruta para el estatus de la orden de servicio
+- Se agregó el campo estatus y la funcionalidad para actualizarlo directo en la lista de servicios
 
 ## todo
 
-- ligar ruta de estatus en el QR
-- agregar campos faltantes (estatus)
 - mejorar estilos del PDF
 - roles

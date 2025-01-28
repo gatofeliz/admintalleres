@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('advance');
             $table->string('total');
             $table->json('photos');
+            $table->string('status')->default('POR REPARAR');
             $table->foreign('responsibleTechnicial_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('brand_id')->references('id')->on('brand');

@@ -36,6 +36,7 @@ class ServiceOrder extends Model
         'advance',
         'total',
         'photos',
+        'status',
     ];
 
     protected $casts = [
