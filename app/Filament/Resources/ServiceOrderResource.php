@@ -241,8 +241,13 @@ class ServiceOrderResource extends Resource
                     ->multiple()
             ])
             ->action(function (ServiceOrder $record, array $data) {
+                $recordPhotos = $record->photos;
+                if (is_string($recordPhotos) && empty($recordPhotos)) {
+                    $recordPhotos = [];
+                }
+
                 $record->update([
-                    'photos' => array_merge($data['photos'], $record->photos),
+                    'photos' => array_merge($data['photos'], $recordPhotos),
                 ]);
             }),
             Action::make('change-status')

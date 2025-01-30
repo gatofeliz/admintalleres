@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('repair');
             $table->string('advance');
             $table->string('total');
-            $table->json('photos');
+            $table->json('photos')->default(null);
             $table->string('status')->default('POR REPARAR');
             $table->foreign('responsibleTechnicial_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
