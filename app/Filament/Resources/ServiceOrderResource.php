@@ -282,7 +282,7 @@ class ServiceOrderResource extends Resource
                 ->modalWidth('4xl')
                 ->modalContent(function ($record) {
                     $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
-                    $route = static::getUrl('status', ['record' => $record]);
+                    $route = static::getUrl('status', ['record' => $record], true, 'guest');
                     QrCode::size(100)->format('png')->generate($route, $qrPath);
                     $pdfName = sprintf('order-doc-%s.pdf', $record->code);
                     Pdf::loadView('pdf.order', ['data' => $record, 'qrPath' => $qrPath])
@@ -301,7 +301,7 @@ class ServiceOrderResource extends Resource
                 ->modalWidth('4xl')
                 ->modalContent(function ($record) {
                     $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
-                    $route = static::getUrl('status', ['record' => $record]);
+                    $route = static::getUrl('status', ['record' => $record], true, 'guest');
                     $qrCode = QrCode::size(100)->format('png')->generate($route, $qrPath);
                     $pdfName = sprintf('order-ticket-%s.pdf', $record->code);
                     Pdf::loadView('pdf.template', ['data' => $record, 'qrPath' => $qrPath])
@@ -333,7 +333,6 @@ class ServiceOrderResource extends Resource
         return [
             'index' => Pages\ListServiceOrders::route('/'),
             'create' => Pages\CreateServiceOrder::route('/create'),
-            'status' => Pages\StatusServiceOrder::route('/{record}/status'),
         ];
     }
     protected function getFooterScripts(): array

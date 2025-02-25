@@ -168,10 +168,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\DashboardPanelProvider::class,
+        App\Providers\Filament\GuestPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
-    /*
+    /* 
     |--------------------------------------------------------------------------
     | Class Aliases
     |--------------------------------------------------------------------------
