@@ -45,7 +45,8 @@ class ServiceOrderResource extends Resource
                     'sin-reparación' => 'SIN REPARACIÓN',
                     'entregado' => 'ENTREGADO',
                     'entregado-sin-reparar' => 'ENTREGADO SIN REPARAR'
-                ]),
+                ])
+                ->required(),
                 Forms\Components\Grid::make(3)
                 ->schema([
                     Forms\Components\TextInput::make('code')
@@ -57,14 +58,17 @@ class ServiceOrderResource extends Resource
                     ->default(now())
                     ->label('Fecha')
                     ->required(),
-                    Forms\Components\Select::make('responsibleTechnicial_id')
-                    ->options(User::pluck('name', 'id'))
-                    ->label('Responsable tecnico')
-                    ->searchable()
+                    Forms\Components\Hidden::make('responsibleTechnicial_id')
+                        ->default(1),
+                    Forms\Components\TextInput::make('tech')
+                        ->label('Responsable tecnico')
+                        ->required()
+                        ->maxLength(255),
                 ]),
                 Forms\Components\Select::make('customer_id')
                 ->options(Customer::pluck('name', 'id'))
                 ->label('Cliente')
+                ->required()
                 ->searchable()->createOptionForm([
                     Forms\Components\TextInput::make('document')
                         ->label('Documento')
@@ -101,6 +105,7 @@ class ServiceOrderResource extends Resource
                         ->options(Brand::pluck('brand', 'id'))
                         ->label('Marca')
                         ->searchable()
+                        ->required()
                         ->createOptionForm([
                             Forms\Components\TextInput::make('brand')
                                 ->label('Marca')
@@ -114,6 +119,7 @@ class ServiceOrderResource extends Resource
                         Forms\Components\Select::make('model_id')
                         ->options(Models::pluck('model', 'id'))
                         ->label('Modelo')
+                        ->required()
                         ->searchable()
                         ->createOptionForm([
                             Forms\Components\TextInput::make('model')
@@ -128,6 +134,7 @@ class ServiceOrderResource extends Resource
                 Forms\Components\Select::make('type_of_equipment_id')
                 ->options(TypeEquipment::pluck('type_of_equipment', 'id'))
                 ->label('Tipo de equipo')
+                ->required()
                 ->searchable()->createOptionForm([
                     Forms\Components\TextInput::make('type_of_equipment')
                         ->label('Tipo de equipo')
@@ -144,6 +151,7 @@ class ServiceOrderResource extends Resource
                     'Si',
                     'No'
                 ])
+                ->required()
                 ->label('Enciende')
                 ->searchable()
                     ])
@@ -154,6 +162,7 @@ class ServiceOrderResource extends Resource
                     'Si',
                     'No'
                 ])
+                ->required()
                 ->label('Golpes')
                 ->searchable(),
                 Forms\Components\Select::make('tactile')
@@ -163,6 +172,7 @@ class ServiceOrderResource extends Resource
                     'No'
                 ])
                 ->label('Táctil')
+                ->required()
                 ->searchable(),
                 Forms\Components\Select::make('cargo_port')
                 ->options(
@@ -170,6 +180,7 @@ class ServiceOrderResource extends Resource
                     'Si',
                     'No']
                 )
+                ->required()
                 ->label('Puerto carga')
                 ->searchable(),
                 Forms\Components\ColorPicker::make('colour')
@@ -192,19 +203,23 @@ class ServiceOrderResource extends Resource
                     Forms\Components\TextInput::make('budget')
                     ->label('Presupuesto')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->default(0),
                     Forms\Components\TextInput::make('repair')
                     ->label('Refacción')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->default(0),
                     Forms\Components\TextInput::make('advance')
                     ->label('Anticipo')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->default(0),
                     Forms\Components\TextInput::make('total')
                     ->label('Total')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->default(0),
             Forms\Components\FileUpload::make('photos')
                 ->image()
                 ->multiple()

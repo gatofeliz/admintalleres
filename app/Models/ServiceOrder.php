@@ -18,6 +18,7 @@ class ServiceOrder extends Model
         'code',
         'date',
         'responsibleTechnicial_id',
+        'tech',
         'customer_id',
         'imei',
         'brand_id',
@@ -42,12 +43,6 @@ class ServiceOrder extends Model
     protected $casts = [
         'photos' => 'array',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'responsibleTechnicial_id','id');
-        
-    }
 
     public function customer()
     {

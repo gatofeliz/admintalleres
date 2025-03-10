@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
             'code' => '005992',
             'date' => '11/01/2025',
             'responsibleTechnicial_id' => $techUser->id,
+            'tech' => 'Técnico Arroyo',
             'customer_id' => $customer->id,
             'imei' => '356303483084057',
             'brand_id' => $brand->id,
