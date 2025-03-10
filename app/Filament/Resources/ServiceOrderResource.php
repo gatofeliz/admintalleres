@@ -70,10 +70,8 @@ class ServiceOrderResource extends Resource
                 ->label('Cliente')
                 ->required()
                 ->searchable()->createOptionForm([
-                    Forms\Components\TextInput::make('document')
-                        ->label('Documento')
-                        ->required()
-                        ->maxLength(255),
+                    Forms\Components\Hidden::make('document')
+                    ->default('documento'),
                     Forms\Components\TextInput::make('telephone')
                         ->label('Telefono')
                         ->required()
