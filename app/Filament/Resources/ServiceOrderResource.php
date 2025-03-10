@@ -172,6 +172,9 @@ class ServiceOrderResource extends Resource
                 ->label('Táctil')
                 ->required()
                 ->searchable(),
+                Forms\Components\TextInput::make('pin')
+                    ->label('PIN')
+                    ->maxLength(10),
                 Forms\Components\Select::make('cargo_port')
                 ->options(
                     ['Puerto carga',
@@ -248,7 +251,7 @@ class ServiceOrderResource extends Resource
         ])
         ->actions([
             Tables\Actions\Action::make('upload-photos')
-            ->label('Subir fotos')
+            ->label('Fotos')
             ->form([
                 FileUpload::make('photos')
                     ->label('Fotos')
@@ -265,7 +268,7 @@ class ServiceOrderResource extends Resource
                 ]);
             }),
             Action::make('change-status')
-            ->label('Cambiar estatus')
+            ->label('Estatus')
             ->form([
                 Components\Select::make('status')
                     ->options(
@@ -309,7 +312,7 @@ class ServiceOrderResource extends Resource
                     ]);
             }),
             Action::make('ticket')
-                ->icon('heroicon-o-printer')
+                ->icon('heroicon-o-ticket')
                 ->label('Ticket')
                 ->modalHeading('Vista Previa')
                 ->modalWidth('4xl')
@@ -325,6 +328,20 @@ class ServiceOrderResource extends Resource
 
                     return view('pdf-viewer', ['url' => $url]);
                 }),
+            Action::make('stamp')
+                ->icon('heroicon-o-device-phone-mobile')
+                ->label('Estampa')
+                ->modalHeading('Estampa')
+                ->modalWidth('4xl')
+                ->modalContent(function ($record) {
+                    $pdfName = sprintf('order-stamp-%s.pdf', $record->code);
+                    Pdf::loadView('pdf.stamp', ['data' => $record])
+                        ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
+                        ->save($pdfName);
+                    $url = sprintf('/%s', $pdfName);
+
+                    return view('pdf-viewer', ['url' => $url]);
+            }),
             Tables\Actions\EditAction::make()->label(''),
         ])
         

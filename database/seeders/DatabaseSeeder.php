@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\ServiceOrder::factory()->create([
             'code' => '005992',
+            'pin' => '1234',
             'date' => '11/01/2025',
             'responsibleTechnicial_id' => $techUser->id,
             'tech' => 'Técnico Arroyo',
