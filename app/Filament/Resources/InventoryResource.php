@@ -27,18 +27,23 @@ class InventoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('category_id')
-                ->options(Category::pluck('category', 'id'))
-                ->label('Categoria')
-                ->searchable()->createOptionForm([
+                    ->options(Category::pluck('category', 'id'))
+                    ->label('Categoria')
+                    ->searchable()
+                    ->createOptionForm([
                     Forms\Components\TextInput::make('category')
                         ->label('Categoria')
                         ->required(),
-                ])
-                ->createOptionUsing(function (array $data) {
+                    ])
+                    ->createOptionUsing(function (array $data) {
                     // Crear una nueva marca con los datos ingresados
                     $category = Category::create(['category' => $data['category']]);
                     return $category->id; // Devolver el ID de la nueva marca
                 }),
+                Forms\Components\TextInput::make('bar_code')
+                    ->label('Barcode')
+                    ->maxLength(255)
+                    ->default('barcode'),
                  // Si deseas que sea obligatorio
                 Forms\Components\TextInput::make('serie')
                     ->label('Serie')
@@ -53,9 +58,36 @@ class InventoryResource extends Resource
                     ->required()
                     ->maxLength(10),
                 Forms\Components\Select::make('supplier_id')
-                    ->options(Supplier::pluck('name','id'))
                     ->label('Proveedor')
-                    ->searchable(),
+                    ->searchable()
+                    ->relationship('supplier', 'name')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nombre')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('document')
+                            ->label('Documento')
+                            ->required()
+                            ->maxLength(255),
+                            Forms\Components\TextInput::make('number_document')
+                            ->label('Número de documento')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Correo electrónico')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('telephone')
+                            ->label('Teléfono')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('address')
+                            ->label('Dirección')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
                 Forms\Components\TextInput::make('purchase_price')
                     ->label('Precio de compra')
                     ->required()

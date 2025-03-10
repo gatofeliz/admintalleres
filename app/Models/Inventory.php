@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Inventory extends Model
 {
@@ -11,7 +11,7 @@ class Inventory extends Model
     protected $table="inventory";
     protected $fillable=[
         'category_id',
-        'bar_code'=>"-",
+        'bar_code',
         'serie',
         'description',
         'stock',
@@ -27,7 +27,10 @@ class Inventory extends Model
     }
     public function category()
     {
-        
         return $this->belongsTo(Category::class);
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }
