@@ -51,7 +51,8 @@ class ServiceOrderResource extends Resource
                     Forms\Components\TextInput::make('code')
                     ->label('Codigo')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->default(uniqid()),
                     Forms\Components\DatePicker::make('date')
                     ->default(now())
                     ->label('Fecha')
