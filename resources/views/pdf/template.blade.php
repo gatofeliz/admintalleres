@@ -103,7 +103,7 @@
     <div class="section-content">
         <p><strong>FECHA:</strong> {{$data->created_at->format('d-m-Y')}} | <strong>HORA:</strong> {{$data->created_at->format('h:i:s')}}</p>
         <p><strong>CLIENTE: </strong> {{$data->customer->name}}</p>
-        <p><strong>TECNICO RESPONSABLE:</strong> {{$data->user->name}}</p>
+        <p><strong>TECNICO RESPONSABLE:</strong> {{$data->tech}}</p>
     </div>
     <div class="section">
         <p>Consulta QR Reparación</p>

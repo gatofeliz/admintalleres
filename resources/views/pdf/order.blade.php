@@ -126,7 +126,7 @@
                     Nombre: {{ $data->customer->name}}<br />
                     Teléfono: {{$data->customer->telephone}}
                 </td>
-                <td>Nombre: {{$data->user->name}}</td>
+                <td>Nombre: {{$data->tech}}</td>
             </tr>
             <tr>
                 <th colspan="2">Datos del Equipo</th>
