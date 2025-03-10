@@ -30,7 +30,7 @@ use App\Filament\Resources\ServiceOrderResource\RelationManagers;
 class ServiceOrderResource extends Resource
 {
     protected static ?string $model = ServiceOrder::class;
-
+    protected static ?string $label = 'Orden de servicio';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

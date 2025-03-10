@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TypeOfEquipmentResource extends Resource
 {
     protected static ?string $model = TypeEquipment::class;
-
+    protected static ?string $label = 'Tipos de equipo';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -19,7 +19,7 @@ use Filament\Forms\Components\FileUpload;
 class InventoryResource extends Resource
 {
     protected static ?string $model = Inventory::class;
-
+    protected static ?string $label = 'Inventario';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
