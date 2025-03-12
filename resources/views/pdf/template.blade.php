@@ -141,9 +141,8 @@
     <div id="payment" class="section-content">
         <p><strong>TOTAL REPARACIÓN: $</strong> {{$data->budget}}</p>
         <p><strong>REFACCIÓN: $</strong> {{$data->repair}}</p>
-        <p><strong>ABONO 1: $</strong> {{$data->advance}}</p>
-        <p><strong>ABONO 2: $</strong> MISSING</p>
-        <p><strong>PENDIENTE DE PAGO: $</strong> {{$data->total}}</p>
+        <p><strong>ABONO: $</strong> {{$data->advance}}</p>
+        <p><strong>PENDIENTE DE PAGO: $</strong> {{$data->budget - $data->advance}}</p>
     </div>
     <div class="section">
         <p>* Políticas de garantía *</p>

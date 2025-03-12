@@ -167,7 +167,7 @@
         <p><strong>Costo Reparación:</strong> ${{$data->budget}}</p>
         <p><strong>Repuesto:</strong> ${{$data->repair}}</p>
         <p><strong>Abono:</strong> ${{$data->advance}}</p>
-        <p><strong>Total a pagar:</strong> ${{$data->total}}</p>
+        <p><strong>Total a pagar:</strong> ${{$data->budget - $data->advance}}</p>
     </div>
     <div id="order-terms">
         <table>
