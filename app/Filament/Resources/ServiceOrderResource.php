@@ -38,7 +38,7 @@ class ServiceOrderResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('status')
-                ->options([ 
+                ->options([
                     'por-reparar' => 'POR REPARAR',
                     'en-espera' => 'EN ESPERA',
                     'reparado' => 'REPARADO',
@@ -192,7 +192,7 @@ class ServiceOrderResource extends Resource
                     ->label('Contraseña')
                     ->required()
                     ->maxLength(255),
-                   
+
                     Forms\Components\Textarea::make('failure')
                     ->label('Especifique la falla de equipo')
                     ->required()
@@ -310,7 +310,7 @@ class ServiceOrderResource extends Resource
                         'url' => $url,
                         'qrPath' => $qrPath,
                     ]);
-            }),
+                }),
             Action::make('ticket')
                 ->icon('heroicon-o-ticket')
                 ->label('Ticket')
@@ -341,14 +341,14 @@ class ServiceOrderResource extends Resource
                     $url = sprintf('/%s', $pdfName);
 
                     return view('pdf-viewer', ['url' => $url]);
-            }),
+                }),
             Tables\Actions\EditAction::make()->label(''),
         ])
-        
+
         ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
         ]);
     }
 

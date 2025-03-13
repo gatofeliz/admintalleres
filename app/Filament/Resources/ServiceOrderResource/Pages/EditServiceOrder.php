@@ -16,4 +16,11 @@ class EditServiceOrder extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['total'] = $data['budget'] - $data['advance'];
+
+        return $data;
+    }
 }

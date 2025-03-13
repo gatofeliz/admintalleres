@@ -36,10 +36,10 @@ class InventoryResource extends Resource
                         ->required(),
                     ])
                     ->createOptionUsing(function (array $data) {
-                    // Crear una nueva marca con los datos ingresados
-                    $category = Category::create(['category' => $data['category']]);
-                    return $category->id; // Devolver el ID de la nueva marca
-                }),
+                        // Crear una nueva marca con los datos ingresados
+                        $category = Category::create(['category' => $data['category']]);
+                        return $category->id; // Devolver el ID de la nueva marca
+                    }),
                 Forms\Components\TextInput::make('bar_code')
                     ->label('Barcode')
                     ->maxLength(255)
@@ -62,32 +62,32 @@ class InventoryResource extends Resource
                     ->searchable()
                     ->relationship('supplier', 'name')
                     ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Nombre')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('document')
-                            ->label('Documento')
-                            ->required()
-                            ->maxLength(255),
-                            Forms\Components\TextInput::make('number_document')
-                            ->label('Número de documento')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('email')
-                            ->label('Correo electrónico')
-                            ->email()
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('telephone')
-                            ->label('Teléfono')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('address')
-                            ->label('Dirección')
-                            ->required()
-                            ->maxLength(255),
-                    ]),
+                            Forms\Components\TextInput::make('name')
+                                ->label('Nombre')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('document')
+                                ->label('Documento')
+                                ->required()
+                                ->maxLength(255),
+                                Forms\Components\TextInput::make('number_document')
+                                ->label('Número de documento')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('email')
+                                ->label('Correo electrónico')
+                                ->email()
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('telephone')
+                                ->label('Teléfono')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('address')
+                                ->label('Dirección')
+                                ->required()
+                                ->maxLength(255),
+                        ]),
                 Forms\Components\TextInput::make('purchase_price')
                     ->label('Precio de compra')
                     ->required()
@@ -101,7 +101,7 @@ class InventoryResource extends Resource
                     ->required()
                     ->maxLength(10),
                 FileUpload::make('photo') // 'document' es el nombre del campo en la base de datos
-                    // Asegúrate de que 'name' no sea null            
+                    // Asegúrate de que 'name' no sea null
                    ->label('Documento')
                    ->image() // Puedes usar 'image()' si es una imagen
                    ->disk('public') // Almacena en el disco 'public' configurado en config/filesystems.php
@@ -118,7 +118,7 @@ class InventoryResource extends Resource
                 ->label('Imagen')
                 ->square() // Hace que la imagen sea cuadrada
                 ->size(50),
-                
+
                     Tables\Columns\TextColumn::make('description')
                     ->searchable()->label('Descripción'),
                     Tables\Columns\TextColumn::make('stock')

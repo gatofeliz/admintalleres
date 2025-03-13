@@ -19,7 +19,7 @@ class StatusServiceOrder extends ViewRecord implements HasTable
     protected static string $resource = ServiceOrderResource::class;
 
     protected static string $view = 'filament.resources.service-order-resource.pages.status-service-order';
-    
+
     protected static ?string $title = 'Estado del servicio';
 
     public function infolist(Infolist $infolist): Infolist
@@ -50,6 +50,6 @@ class StatusServiceOrder extends ViewRecord implements HasTable
                     ->label('Modelo'),
             ])
             ->paginated(false)
-            ;
+        ;
     }
 }

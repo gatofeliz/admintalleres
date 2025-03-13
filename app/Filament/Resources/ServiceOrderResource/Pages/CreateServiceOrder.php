@@ -14,7 +14,9 @@ class CreateServiceOrder extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $actualOrderServicesCount = ServiceOrder::all()->count();
-        $data['code'] = str_pad($actualOrderServicesCount+1, 6, "0", STR_PAD_LEFT);;
+        $data['code'] = str_pad($actualOrderServicesCount + 1, 6, "0", STR_PAD_LEFT);
+        ;
+        $data['total'] = $data['budget'] - $data['advance'];
 
         return $data;
     }

@@ -7,14 +7,13 @@ use App\Models\TypeEquipment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class ServiceOrder extends Model
 {
     use HasFactory;
 
-    protected $table="serviceorder";
+    protected $table = "serviceorder";
 
-    protected $fillable=[
+    protected $fillable = [
         'code',
         'date',
         'responsibleTechnicial_id',
@@ -61,6 +60,6 @@ class ServiceOrder extends Model
 
     public function typeEquipment()
     {
-        return $this->belongsTo(TypeEquipment::class, 'type_of_equipment_id','id');
+        return $this->belongsTo(TypeEquipment::class, 'type_of_equipment_id', 'id');
     }
 }
