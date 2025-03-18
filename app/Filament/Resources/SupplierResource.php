@@ -27,10 +27,6 @@ class SupplierResource extends Resource
                     ->label('Nombre')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('document')
-                ->label('Documento')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('telephone')
                     ->label('Teléfono')
                     ->required()
@@ -47,8 +43,6 @@ class SupplierResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('document')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telephone')
                     ->searchable(),

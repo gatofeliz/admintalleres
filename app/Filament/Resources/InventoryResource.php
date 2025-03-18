@@ -66,10 +66,6 @@ class InventoryResource extends Resource
                                 ->label('Nombre')
                                 ->required()
                                 ->maxLength(255),
-                            Forms\Components\TextInput::make('document')
-                                ->label('Documento')
-                                ->required()
-                                ->maxLength(255),
                             Forms\Components\TextInput::make('telephone')
                                 ->label('Teléfono')
                                 ->required()
@@ -97,7 +93,6 @@ class InventoryResource extends Resource
                    ->image() // Puedes usar 'image()' si es una imagen
                    ->disk('public') // Almacena en el disco 'public' configurado en config/filesystems.php
                    ->directory('documents') // Dirección dentro del almacenamiento para organizar los archivos
-                   ->required()
             ]);
     }
 
