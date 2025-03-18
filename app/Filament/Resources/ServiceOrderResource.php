@@ -246,6 +246,7 @@ class ServiceOrderResource extends Resource
                     })
                     ->html(),
         ])
+        ->defaultSort('id', 'desc')
         ->filters([
             // Agrega aquí tus filtros si es necesario
         ])
