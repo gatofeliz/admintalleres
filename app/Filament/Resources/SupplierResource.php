@@ -31,20 +31,11 @@ class SupplierResource extends Resource
                 ->label('Documento')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\TextInput::make('number_document')
-                    ->label('Número de documento')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                ->label('Correo electrónico')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                    Forms\Components\TextInput::make('telephone')
+                Forms\Components\TextInput::make('telephone')
                     ->label('Teléfono')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\TextInput::make('address')
+                Forms\Components\TextInput::make('address')
                     ->label('Dirección')
                     ->required()
                     ->maxLength(255),
@@ -58,10 +49,6 @@ class SupplierResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('document')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('number_document')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telephone')
                     ->searchable(),

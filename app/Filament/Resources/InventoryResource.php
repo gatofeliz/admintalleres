@@ -70,15 +70,6 @@ class InventoryResource extends Resource
                                 ->label('Documento')
                                 ->required()
                                 ->maxLength(255),
-                                Forms\Components\TextInput::make('number_document')
-                                ->label('Número de documento')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('email')
-                                ->label('Correo electrónico')
-                                ->email()
-                                ->required()
-                                ->maxLength(255),
                             Forms\Components\TextInput::make('telephone')
                                 ->label('Teléfono')
                                 ->required()
