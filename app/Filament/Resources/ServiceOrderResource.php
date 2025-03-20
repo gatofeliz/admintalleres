@@ -330,7 +330,7 @@ class ServiceOrderResource extends Resource
                 ->modalContent(function ($record) {
                     $pdfName = sprintf('order-stamp-%s.pdf', $record->code);
                     Pdf::loadView('pdf.stamp', ['data' => $record])
-                        ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
+                        ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'landscape')
                         ->save($pdfName);
                     $url = sprintf('/%s', $pdfName);
 
