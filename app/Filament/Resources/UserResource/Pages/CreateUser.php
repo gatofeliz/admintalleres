@@ -12,7 +12,7 @@ class CreateUser extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['email'] = 'default@default.com';
+        $data['email'] = sprintf('%s@default.com', trim($data['name']));
 
         return $data;
     }
