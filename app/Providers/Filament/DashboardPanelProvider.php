@@ -6,6 +6,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use App\Filament\Auth\Login;
 use Filament\Support\Colors\Color;
 use App\Http\Middleware\FirstResource;
 use Filament\Http\Middleware\Authenticate;
@@ -28,7 +29,7 @@ class DashboardPanelProvider extends PanelProvider
             ->default()
             ->id('dashboard')
             ->path('dashboard')
-            ->login()
+            ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
