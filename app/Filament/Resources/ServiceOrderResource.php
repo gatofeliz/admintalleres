@@ -172,9 +172,6 @@ class ServiceOrderResource extends Resource
                 ->label('Táctil')
                 ->required()
                 ->searchable(),
-                Forms\Components\TextInput::make('pin')
-                    ->label('PIN')
-                    ->maxLength(10),
                 Forms\Components\Select::make('cargo_port')
                 ->options(
                     ['Puerto carga',
