@@ -126,7 +126,7 @@
         <p><strong>MODELO:</strong> {{$data->model->model}}</p>
         <p><strong>ENCIENDE:</strong> {{$data->turn_on}}</p>
         <p><strong>GOLPES:</strong> {{$data->blows}}</p>
-        <p><strong>TÁCTIL:</strong><{{$data->tactile}}</p>
+        <p><strong>TÁCTIL:</strong> {{$data->tactile}}</p>
         <p><strong>PUERTO:</strong> {{$data->cargo_port}}</p>
         <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
     </div>

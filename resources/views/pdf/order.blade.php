@@ -135,6 +135,7 @@
                 <td>
                     Equipo: {{$data->typeEquipment->type_of_equipment}}<br />
                     Marca: {{$data->brand->brand}}<br />
+                    Táctil: {{$data->tactile}}<br />
                     Enciende: {{$data->turn_on}}<br />
                     Golpes: {{$data->blows}}<br />
                     Batería: {{$data->cargo_port}}

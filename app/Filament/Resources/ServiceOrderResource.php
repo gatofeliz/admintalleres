@@ -145,9 +145,8 @@ class ServiceOrderResource extends Resource
                 }),
                 Forms\Components\Select::make('turn_on')
                 ->options([
-                    'Enciende',
-                    'Si',
-                    'No'
+                    'si' => 'Si',
+                    'no' => 'No',
                 ])
                 ->required()
                 ->label('Enciende')
@@ -156,28 +155,25 @@ class ServiceOrderResource extends Resource
                 ,
                 Forms\Components\Select::make('blows')
                 ->options([
-                    'Golpes',
-                    'Si',
-                    'No'
+                    'si' => 'Si',
+                    'no' => 'No',
                 ])
                 ->required()
                 ->label('Golpes')
                 ->searchable(),
                 Forms\Components\Select::make('tactile')
                 ->options([
-                    'Táctil',
-                    'Si',
-                    'No'
+                    'si' => 'Si',
+                    'no' => 'No',
                 ])
                 ->label('Táctil')
                 ->required()
                 ->searchable(),
                 Forms\Components\Select::make('cargo_port')
-                ->options(
-                    ['Puerto carga',
-                    'Si',
-                    'No']
-                )
+                ->options([
+                    'si' => 'Si',
+                    'no' => 'No',
+                ])
                 ->required()
                 ->label('Puerto carga')
                 ->searchable(),
