@@ -319,7 +319,7 @@ class ServiceOrderResource extends Resource
                     $route = static::getUrl('status', ['record' => $record], true, 'guest');
                     $qrCode = QrCode::size(100)->format('png')->generate($route, $qrPath);
                     $pdfName = sprintf('order-ticket-%s.pdf', $record->code);
-                    Pdf::loadView('pdf.template', ['data' => $record, 'qrPath' => $qrPath])
+                    Pdf::loadView('pdf.ticket', ['data' => $record, 'qrPath' => $qrPath])
                         ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
                         ->save($pdfName);
                     $url = sprintf('/%s', $pdfName);

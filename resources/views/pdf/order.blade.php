@@ -123,7 +123,7 @@
             </tr>
             <tr>
                 <td>
-                    Nombre: {{ $data->customer->name}}<br />
+                    Nombre: {{$data->customer->name}}<br />
                     Teléfono: {{$data->customer->telephone}}
                 </td>
                 <td>Nombre: {{$data->tech}}</td>
@@ -133,17 +133,14 @@
             </tr>
             <tr>
                 <td>
-                    Equipo: {{ $data->customer->name}}<br />
-                    Marca: {{$data->customer->telephone}}<br />
-                    PIN: MISSING<br />
+                    Equipo: {{$data->typeEquipment->type_of_equipment}}<br />
+                    Marca: {{$data->brand->brand}}<br />
                     Enciende: {{$data->turn_on}}<br />
                     Golpes: {{$data->blows}}<br />
                     Batería: {{$data->cargo_port}}
                 </td>
                 <td>
                     Modelo: {{$data->model->model}}<br />
-                    Serie: MISSING<br />
-                    Estado: MISSING
                 </td>
             </tr>
             <tr>

@@ -123,13 +123,12 @@
     <div class="section-content">
         <p><strong>IMEI:</strong> {{$data->imei}}</p>
         <p><strong>MARCA:</strong> {{$data->brand->brand}}</p>
-        <p><strong>MODELO:</strong> {{$data->brand->brand}}</p>
-        <p><strong>ENCIENDE:</strong> {{$data->brand->brand}}</p>
-        <p><strong>GOLPES:</strong> {{$data->brand->brand}}</p>
-        <p><strong>TÁCTIL:</strong></p>
-        <p><strong>PUERTO:</strong> {{$data->brand->brand}}</p>
+        <p><strong>MODELO:</strong> {{$data->model->model}}</p>
+        <p><strong>ENCIENDE:</strong> {{$data->turn_on}}</p>
+        <p><strong>GOLPES:</strong> {{$data->blows}}</p>
+        <p><strong>TÁCTIL:</strong><{{$data->tactile}}</p>
+        <p><strong>PUERTO:</strong> {{$data->cargo_port}}</p>
         <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
-        <p><strong>PIN:</strong> MISSING</p>
     </div>
     <div class="section">
         <p>Reporte Técnico</p>
