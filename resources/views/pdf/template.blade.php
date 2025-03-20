@@ -23,7 +23,6 @@
 
         .contact {
             text-align: center;
-            font-weight: bold;
         }
         
         .section {
@@ -82,6 +81,10 @@
             font-weight: bold;
             text-align: center;
         }
+        .stronger {
+            font-weight: bold;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -91,8 +94,8 @@
     </div>
     <div class="contact">
         <p>Luis Figueroa 88 Local 2</p>
-        <p>Tel: 323 235 3707</p>
-        <p><strong>WhatsApp:</strong> 323 131 8462</p>
+        <p class="stronger">Tel: 323 235 3707</p>
+        <p class="stronger">WhatsApp: 323 131 8462</p>
         <p>Lunes a Viernes</p>
         <p>9:00 am - 2:00 pm y 4:00 pm - 7:00 pm</p>
         <p><strong>Sábado:</strong> 9:00 am - 2:00 pm</p>
