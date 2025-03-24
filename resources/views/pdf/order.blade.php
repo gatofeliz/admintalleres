@@ -144,7 +144,7 @@
                     Modelo: {{$data->model->model}}<br />
                 </td>
                 <td>
-                    Contraseña: {{$data->model->password}}
+                    Contraseña: {{$data->model->password}} <br/>
                 </td>
             </tr>
             <tr>
