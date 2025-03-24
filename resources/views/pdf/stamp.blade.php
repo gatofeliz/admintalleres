@@ -46,8 +46,9 @@
     <tr>
         <td colspan="2">
             <p><strong>Cliente: </strong> {{$data->customer->name}}</p>
-            <p><strong>Teléfono: </strong> {{$data->customer->name}}</p>
-            <p><strong>Marca:</strong> {{$data->brand->brand}}</p>
+            <p><strong>Teléfono: </strong> {{$data->customer->telephone}}</p>
+            <p><strong>Marca:</strong> {{$data->brand->brand}}  {{$data->model->model}}  |  PIN: 
+            {{$data->password}}</p>
             <p><strong>Falla:</strong> {{$data->failure}}</p>
             <p><strong>Detalle reparación:</strong> {{$data->diagnosis}} </p>
         </td>

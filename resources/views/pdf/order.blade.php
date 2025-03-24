@@ -111,7 +111,7 @@
         <div class="column" id="order-id">
             <p class="eye-pick">ORDEN Nº <br> {{ $data->code }}</p><br />
             <p>FECHA: {{$data->created_at->format('d-m-Y')}}</p>
-            <p>HORA: {{$data->created_at->format('h:i:s')}}</p>
+            <p>HORA: {{$data->created_at->format('h:i:s A')}}</p>
         </div>
     </div>
     <div class="clear"></div>
@@ -142,6 +142,9 @@
                 </td>
                 <td>
                     Modelo: {{$data->model->model}}<br />
+                </td>
+                <td>
+                    Contraseña: {{$data->model->password}}
                 </td>
             </tr>
             <tr>

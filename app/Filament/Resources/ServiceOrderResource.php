@@ -275,6 +275,7 @@ class ServiceOrderResource extends Resource
                             'entregado-sin-reparar' => 'ENTREGADO SIN REPARAR'
                         ]
                     )
+                    ->default(fn ($record) => $record?->status)
                     ->required(),
             ])
             ->action(function (ServiceOrder $record, array $data) {
