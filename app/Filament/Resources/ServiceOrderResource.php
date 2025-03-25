@@ -306,23 +306,7 @@ class ServiceOrderResource extends Resource
                         'qrPath' => $qrPath,
                     ]);
                 }),
-            Action::make('ticket')
-                ->icon('heroicon-o-ticket')
-                ->label('Ticket')
-                ->modalHeading('Vista Previa')
-                ->modalWidth('4xl')
-                ->modalContent(function ($record) {
-                    $qrPath = sprintf('%s/%s.png', public_path(), $record->code);
-                    $route = static::getUrl('status', ['record' => $record], true, 'guest');
-                    $qrCode = QrCode::size(100)->format('png')->generate($route, $qrPath);
-                    $pdfName = sprintf('order-ticket-%s.pdf', $record->code);
-                    Pdf::loadView('pdf.ticket', ['data' => $record, 'qrPath' => $qrPath])
-                        ->setPaper([0, 0, 207.2125984252, 842.1732283465], 'portrait')
-                        ->save($pdfName);
-                    $url = sprintf('/%s', $pdfName);
-
-                    return view('pdf-viewer', ['url' => $url]);
-                }),
+            
             Action::make('stamp')
                 ->icon('heroicon-o-device-phone-mobile')
                 ->label('Estampa')
