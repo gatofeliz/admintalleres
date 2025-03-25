@@ -108,7 +108,12 @@
         <p><strong>CLIENTE: </strong> {{$data->customer->name}}</p>
         <p><strong>TECNICO RESPONSABLE:</strong> {{$data->tech}}</p>
     </div>
-    
+    <div class="section">
+        <p>Consulta QR Reparación</p>
+    </div>
+    <div id="qr" class="section-content">
+        <img src="{{ $qrPath }}" height="100">
+    </div>
     <div id="status" class="section-content">
         <p>Escanee con el móvil para consultar status de la reparación</p>
     </div>
