@@ -109,7 +109,7 @@
             <p>Sábado: 9:00 am - 2:00 pm</p>
         </div>
         <div class="column" id="order-id">
-            <p class="eye-pick">ORDEN Nº <br> {{ $data->code }}</p><br />
+            
             <p>FECHA: {{$data->created_at->format('d-m-Y')}}</p>
             <p>HORA: {{$data->created_at->format('h:i:s A')}}</p>
         </div>
