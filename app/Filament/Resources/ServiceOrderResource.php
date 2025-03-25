@@ -285,7 +285,28 @@ class ServiceOrderResource extends Resource
             }),
             Action::make('Wa')
                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('Hola ' . $record->name . ', quiero más información.'))
+                ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('
+                // 
+                // ¡Saludos!👋🏼 
+ 
+Estimad@ OSWALDO GONZALEZ  ☺ hemos recibido su equipo en nuestras instalaciones! 📬
+
+⚙Reparación: #001174
+🔍Equipo: CELULAR 
+🔢Modelo: SAMSUNG S23 PLUS
+⿪Serial: 
+
+❓Motivo del ingreso: 
+💡Estado Actual: POR REPARAR
+
+📌Se informará por este medio el estado de su equipo o puede consultar en tiempo real, escaneando el código QR del documento entregado. 
+ 
+Gracias por su confianza!✨ 
+ 
+CONSUME 📱
+
+                // 
+                // '))
                 ->openUrlInNewTab(),
             Action::make('Imprimir')
                 ->icon('heroicon-o-printer')
