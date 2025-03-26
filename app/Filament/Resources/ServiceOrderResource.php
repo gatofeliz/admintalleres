@@ -285,28 +285,28 @@ class ServiceOrderResource extends Resource
             }),
             Action::make('Wa')
                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                ->url(fn ($record) => 'https://wa.me/' . $record->phone . '?text=' . urlencode('
+                ->url(fn ($record) => 'https://web.whatsapp.com/send?phone=' . $record->phone . '&text=' . rawurlencode(
+                    '¡Saludos!👋🏼 
+ 
+                    Estimad@ '.$record->customer->name.'  ☺️ hemos recibido su equipo en nuestras instalaciones! 📬
+                    
+                    ⚙️Reparación: #'.$record->code.'
+                    🔍Equipo: CELULAR 
+                    🔢Modelo: '.$record->brand->brand.''.$record->model->model.''.
+                    
+                   '#️⃣Serial: 
+                    
+                    ❓Motivo del ingreso: 
+                    💡Estado Actual: '.$record->status.'
+                    
+                    📌Se informará por este medio el estado de su equipo o puede consultar en tiempo real, escaneando el código QR del documento entregado. 
+                     
+                    Gracias por su confianza!✨ 
+                     
+                    CONSUME 📱'
                 
-                 ¡Saludos!👋🏼 
- 
-Estimad@ '.$record->name.'  ☺ hemos recibido su equipo en nuestras instalaciones! 📬
-
-⚙Reparación: '.$record->code.'
-🔍Equipo: CELULAR 
-🔢Modelo: '.$record->model->model.'
-⿪Serial: 
-
-❓Motivo del ingreso: 
-💡Estado Actual: '.$record->status.'
-
-📌Se informará por este medio el estado de su equipo o puede consultar en tiempo real, escaneando el código QR del documento entregado. 
- 
-Gracias por su confianza!✨ 
- 
-CONSUME 📱
-
-                // 
-                // '))
+                )
+)
                 ->openUrlInNewTab(),
             Action::make('Imprimir')
                 ->icon('heroicon-o-printer')
