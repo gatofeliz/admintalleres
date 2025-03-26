@@ -227,6 +227,7 @@ class ServiceOrderResource extends Resource
                 TextColumn::make('code')
                     ->searchable()->label('Código'),
                 TextColumn::make('customer.name')
+                
                     ->label('Cliente')->searchable(),
                 TextColumn::make('user.name')
                     ->label('Técnico')->searchable(),
@@ -285,15 +286,15 @@ class ServiceOrderResource extends Resource
             }),
             Action::make('Wa')
                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                ->url(fn ($record) => 'https://web.whatsapp.com/send?phone=' . $record->phone . '&text=' . rawurlencode(
+                ->url(fn ($record) => 'https://web.whatsapp.com/send?phone=+52'.$record->customer->telephone.'&text=' . rawurlencode(
                     '¡Saludos!👋🏼 
  
-                    Estimad@ '.$record->customer->name.'  ☺️ hemos recibido su equipo en nuestras instalaciones! 📬
+                    Estimad@ '.$record->customer->name.' ' .$record->customer->lastname.'  ☺️ hemos recibido su equipo en nuestras instalaciones! 📬
                     
                     ⚙️Reparación: #'.$record->code.'
                     🔍Equipo: CELULAR 
                     🔢Modelo: '.$record->brand->brand.''.$record->model->model.''.
-                    
+
                    '#️⃣Serial: 
                     
                     ❓Motivo del ingreso: 
