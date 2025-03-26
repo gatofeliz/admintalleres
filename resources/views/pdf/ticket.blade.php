@@ -129,6 +129,7 @@
         <p><strong>TÁCTIL:</strong> {{$data->tactile}}</p>
         <p><strong>PUERTO:</strong> {{$data->cargo_port}}</p>
         <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
+        <p><strong>PIN:</strong>{{$data->password}}</p>
     </div>
     <div class="section">
         <p>Reporte Técnico</p>
