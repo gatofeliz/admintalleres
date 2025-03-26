@@ -131,6 +131,9 @@
         <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
         <p><strong>PIN:</strong>{{$data->password}}</p>
     </div>
+    <div class="section-pin">
+    <img src="{{ public_path('/consume-ticket-logo.png') }}" height="50">
+    </div>
     <div class="section">
         <p>Reporte Técnico</p>
     </div>
