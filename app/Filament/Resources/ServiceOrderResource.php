@@ -286,54 +286,61 @@ class ServiceOrderResource extends Resource
             }),
             Action::make('Wa')
                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                ->url(fn ($record) => 'https://web.whatsapp.com/send?phone=+52'.$record->customer->telephone.'&text=' . rawurlencode(
-                    $record->status
-                        ? '¡Saludos!👋🏼 
+                ->url(fn ($record) => 'https://web.whatsapp.com/send?phone=+52' . $record->customer->telephone . 
+                '&text=' . rawurlencode(
+                    $record->status === 'por-reparar' ? '
+                    
+                    ¡Saludos!👋🏼 
  
-                        Estimad@ '.$record->name.''.$record->lastname.', ☺️su equipo fue reparado con éxito! 🎉🥳
-                        
-                        ⚙️Reparación: #001201
-                        🔍Equipo: CELULAR 
-                        🔢Modelo: SAMSUNG A04
-                        #️⃣Serial: 
-                        
-                        ❓Motivo del ingreso: CAMBIO DE PANTALLA
-                        📝Diagnóstico: O
-                        💡Estado Actual: REPARADO
-                         
-                        💰Valor Total: $ 1000
-                        💲Abono1: $ 0
-                        💲Abono2: $ 0
-                        💸Saldo Pendiente: $ 1000
-                        
-                        📌Le informamos con todo gusto que su equipo ya se encuentra totalmente listo, ya puede acudir a nuestra sucursal a recogerlo acompañado con su hoja de remisión.🙌🏻
-                         
-                        ⏱Nuestros horarios son de Lunes a Viernes de 08:00 am a 7:00 pm y Sábados de 8:00 am a 2:00 pm, horario corrido. 
-                         
-                        ¡Le estaremos esperando!✨
-                         
-                         CONSUME 📱'
-                        
-                        : 
-                
-                        '¡Saludos!👋🏼 
+                    Estimad@ '.$record->customer->name.' '.$record->customer->lastname.'  ☺️ hemos recibido su equipo en nuestras instalaciones! 📬
+
+                    ⚙️Reparación: '.$record->code.'
+                    🔍Equipo: '.$record->type_of_equipment.' 
+                    🔢Modelo: '.$record->brand->brand.' '.$record->model->model.'
+                    #️⃣Serial: 
+
+                    ❓Motivo del ingreso: 
+                    💡Estado Actual: POR REPARAR
+
+                    📌Se informará por este medio el estado de su equipo o puede consultar en tiempo real, escaneando el código QR del documento entregado. 
+                    
+                    Gracias por su confianza!✨ 
+                    
+                    CONSUME 📱
+                    
+                    ' :
+                    ($record->status === 'reparado' ? '
+                    
+                    ¡Saludos!👋🏼 
  
-                        Estimad@ '.$record->name.''.$record->lastname.', ☺️su equipo fue entregado!📍✅
+                    Estimad@ '.$record->customer->name.' '.$record->customer->lastname.', ☺️su equipo fue reparado con éxito! 🎉🥳
 
-                        ⚙️Reparación: #001201
-                        🔍Equipo: CELULAR 
-                        🔢Modelo: SAMSUNG A04
-                        #️⃣Serial: 
+                    ⚙️Reparación: '.$record->code.'
+                    🔍Equipo: '.$record->type_of_equipment.' 
+                    🔢Modelo: '.$record->brand->brand.' '.$record->model->model.'
+                    #️⃣Serial: 
 
-                        📌Le informamos que su equipo ya fue entregado exitosamente. Agradecemos su confianza en nosotros, fue un placer atenderle. Quedamos a sus órdenes.😊
-                        
-                        ‼️En dado caso de tener algún detalle con la reparación. Puede acudir a nuestra sucursal acompañado de su hoja de remisión para que podamos apoyarle.🙌🏻 
-                        
-                        ¡Gracias por la confianza!.✨ 
-                        
-                        CONSUME 📱'
-                    )
+                    ❓Motivo del ingreso: '.$record->failure.'
+                    📝Diagnóstico: '.$record->diagnosis.'
+                    💡Estado Actual: REPARADO
+                    
+                    💰Valor Total: $ '.$record->total.'
+                    💲Abono1: $ '.$record->advance.'
+                    💸Saldo Pendiente: $ '.($record->total-$record->advance).'
+
+                    📌Le informamos con todo gusto que su equipo ya se encuentra totalmente listo, ya puede acudir a nuestra sucursal a recogerlo acompañado con su hoja de remisión.🙌🏻
+                    
+                    ⏱Nuestros horarios son de Lunes a Viernes de 08:00 am a 7:00 pm y Sábados de 8:00 am a 2:00 pm, horario corrido. 
+                    
+                    ¡Le estaremos esperando!✨
+                    
+                    CONSUME 📱
+                    
+                    
+                    ' :
+                    '')
                 )
+)
                 ->openUrlInNewTab(),
             Action::make('Imprimir')
                 ->icon('heroicon-o-printer')
