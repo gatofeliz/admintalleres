@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documento</title>
     <style>
-        @page { size: 9.15cm 5.42cm landscape; }
+        @page { size: 7.15cm 3.42cm landscape; }
         * {
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #FFFFFF;
-            font-size: 11px;
+            font-size: 7px;
             padding: 10px;
         }
 
@@ -26,7 +27,7 @@
         }
 
         .section-content p {
-            font-size: 10px;
+            font-size: 6px;
         }
         table {
             border-collapse: collapse;
@@ -47,10 +48,10 @@
         <td colspan="2">
             <p><strong>Cliente: </strong> {{$data->customer->name}}</p>
             <p><strong>Teléfono: </strong> {{$data->customer->telephone}}</p>
-            <p><strong>Marca:</strong> {{$data->brand->brand}}  {{$data->model->model}}  |  PIN: 
-            {{$data->password}}</p>
+            <p><strong>Marca:</strong> {{$data->brand->brand}}</p>
+            <p><strong>Modelo:</strong> {{$data->model->model}}</p>
+            <p><strong>PIN:</strong> {{$data->password}}</p>
             <p><strong>Falla:</strong> {{$data->failure}}</p>
-            <p><strong>Detalle reparación:</strong> {{$data->diagnosis}} </p>
         </td>
     </tr>
 </table>
