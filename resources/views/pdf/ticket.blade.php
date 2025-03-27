@@ -42,6 +42,21 @@
             font-size: 10px;
         }
 
+        .section-content:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .section-content .section-col {
+            float: left;
+            width: 50%;
+        }
+
+        .section-col div {
+            text-align: center;
+        }
+
         #qr {
             text-align: center;
         }
@@ -121,18 +136,22 @@
         <p>Datos del equipo</p>
     </div>
     <div class="section-content">
-        <p><strong>IMEI:</strong> {{$data->imei}}</p>
-        <p><strong>MARCA:</strong> {{$data->brand->brand}}</p>
-        <p><strong>MODELO:</strong> {{$data->model->model}}</p>
-        <p><strong>ENCIENDE:</strong> {{$data->turn_on}}</p>
-        <p><strong>GOLPES:</strong> {{$data->blows}}</p>
-        <p><strong>TÁCTIL:</strong> {{$data->tactile}}</p>
-        <p><strong>PUERTO:</strong> {{$data->cargo_port}}</p>
-        <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
-        <p><strong>PIN:</strong>{{$data->password}}</p>
-    </div>
-    <div class="section-pin">
-    <img src="{{ public_path('/consume-ticket-logo.png') }}" height="50">
+        <div class="section-col">
+            <p><strong>IMEI:</strong> {{$data->imei}}</p>
+            <p><strong>MARCA:</strong> {{$data->brand->brand}}</p>
+            <p><strong>MODELO:</strong> {{$data->model->model}}</p>
+            <p><strong>ENCIENDE:</strong> {{$data->turn_on}}</p>
+            <p><strong>GOLPES:</strong> {{$data->blows}}</p>
+            <p><strong>TÁCTIL:</strong> {{$data->tactile}}</p>
+            <p><strong>PUERTO:</strong> {{$data->cargo_port}}</p>
+            <p><strong>TIPO EQUIPO:</strong>{{$data->typeEquipment->type_of_equipment}}</p>
+            <p><strong>PIN:</strong>{{$data->password}}</p>
+        </div>
+        <div class="section-col">
+            <div>
+                <img src="{{ public_path('/patron.png') }}" height="50">
+            </div>
+        </div>
     </div>
     <div class="section">
         <p>Reporte Técnico</p>
