@@ -149,7 +149,7 @@
         </div>
         <div class="section-col">
             <div>
-                <img src="{{ public_path('/patron.png') }}" height="50">
+                <img src="{{ public_path('./patron.png') }}" height="50">
             </div>
         </div>
     </div>
