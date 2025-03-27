@@ -36,13 +36,16 @@
         td {
             padding: 5px;
         }
+        #no-reparacion{
+            font-size: 10px;
+        }
     </style>
 </head>
 <body>
 <table border="1">
     <tr>
-        <td><img src="{{ public_path('/consume-ticket-logo.png') }}" height="30"></td>
-        <td><p><strong>Reparación Nº: </strong> {{$data->code}}</p></td>
+        <td><img src="{{ public_path('/consume-ticket-logo.png') }}" height="15"></td>
+        <td><p><strong>Reparación Nº: </strong><span id="no-reparacion"> {{$data->code}}</span></p></td>
     </tr>
     <tr>
         <td colspan="2">
