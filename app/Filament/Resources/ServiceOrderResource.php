@@ -225,14 +225,17 @@ class ServiceOrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->searchable()->label('Código'),
+                    ->label('Código')
+                    ->searchable(),
                 TextColumn::make('customer.name')
-                
-                    ->label('Cliente')->searchable(),
-                TextColumn::make('user.name')
-                    ->label('Técnico')->searchable(),
+                    ->label('Cliente')
+                    ->searchable(),
+                TextColumn::make('tech')
+                    ->label('Técnico')
+                    ->searchable(),
                 TextColumn::make('brand.brand')
-                    ->searchable()->label('Marca'),
+                    ->label('Marca')
+                    ->searchable(),
                 TextColumn::make('')
                     ->label('')
                     ->formatStateUsing(function ($state) {
