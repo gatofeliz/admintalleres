@@ -419,40 +419,4 @@ class ServiceOrderResource extends Resource
             'create' => Pages\CreateServiceOrder::route('/create'),
         ];
     }
-    protected function getFooterScripts(): array
-    {
-        // todo: remove
-        return [
-            <<<JS
-            document.addEventListener('alpine:init', () => {
-                window.addEventListener('imprimirRegistro', (event) => {
-                    const datos = event.detail;
-
-                    // Crear contenido para imprimir
-                    const contenido = `
-                        <div style="font-family: Arial, sans-serif; padding: 20px;">
-                            <h1>Detalles del Registro</h1>
-                            <p><strong>Nombre:</strong> ${datos.Nombre}</p>
-                            <p><strong>Correo Electrónico:</strong> ${datos["Correo Electrónico"]}</p>
-                        </div>
-                    `;
-
-                    // Abrir ventana de impresión
-                    const ventanaImpresion = window.open('', '_blank');
-                    ventanaImpresion.document.open();
-                    ventanaImpresion.document.write(`
-                        <html>
-                            <head>
-                                <title>Imprimir Registro</title>
-                            </head>
-                            <body>${contenido}</body>
-                        </html>
-                    `);
-                    ventanaImpresion.document.close();
-                    ventanaImpresion.print();
-                });
-            });
-            JS,
-        ];
-    }
 }
