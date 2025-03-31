@@ -249,7 +249,9 @@ class ServiceOrderResource extends Resource
                 TextColumn::make('customer.name')
                     ->label('Cliente')
                     ->searchable(),
-               
+                TextColumn::make('technical.name')
+                    ->label('Tecnico')
+                    ->searchable(),
                 TextColumn::make('brand.brand')
                     ->label('Marca')
                     ->searchable(),

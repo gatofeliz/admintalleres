@@ -57,7 +57,10 @@ class ServiceOrder extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    
+    public function technical()
+    {
+        return $this->belongsTo(User::class,'responsibleTechnicial_id','id');
+    }
 
     public function model(){
         return $this->belongsTo(Models::class);
