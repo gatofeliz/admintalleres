@@ -193,8 +193,13 @@
 
     <div id="sign"">
         <p>________________________________</p>
+        <p>ATENDIDO POR: {{$data->technical->name}}</p>
+        <p>________________________________</p>
+
+        <p>________________________________</p>
         <p>Firma Cliente</p>
     </div>
+
     <div id="order-status">
         <div class="column">
             <div class="status-box">
