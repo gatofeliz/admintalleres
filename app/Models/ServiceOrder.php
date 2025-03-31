@@ -17,7 +17,6 @@ class ServiceOrder extends Model
         'code',
         'date',
         'responsibleTechnicial_id',
-        'tech',
         'customer_id',
         'imei',
         'brand_id',
@@ -48,14 +47,17 @@ class ServiceOrder extends Model
         return $this->belongsTo(Customer::class,'customer_id','id');
     }
 
-    public function model()
+    public function user()
     {
-        return $this->belongsTo(Models::class);
+        return $this->belongsTo(User::class);
     }
 
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+    public function model(){
+        return $this->belongsTo(Models::class);
     }
 
     public function typeEquipment()

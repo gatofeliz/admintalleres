@@ -58,12 +58,31 @@ class ServiceOrderResource extends Resource
                     ->default(now())
                     ->label('Fecha')
                     ->required(),
-                    Forms\Components\Hidden::make('responsibleTechnicial_id')
-                        ->default(1),
-                    Forms\Components\TextInput::make('tech')
-                        ->label('Responsable tecnico')
+                    
+                    Forms\Components\Select::make('responsibleTechnicial_id')
+                        ->options(User::pluck('name', 'id'))
+                        ->label('Responsable técnico')
                         ->required()
-                        ->maxLength(255),
+                        ->searchable()
+                        ->createOptionForm([
+                            Forms\Components\TextInput::make('name')
+                                ->label('Nombre')
+                                ->required(),
+                            Forms\Components\TextInput::make('password')
+                                ->label('Contraseña')
+                                ->password()
+                                ->required(),
+                            Forms\Components\TextInput::make('email')
+                                ->label('Correo electrónico')
+                                ->required(),
+                        ])
+                    ->createOptionUsing(function (array $data) {
+                        
+                        // Crear una nueva marca con los datos ingresados
+                        $model = User::create(['name' => $data['name'],
+                        'email'=>$data['email'],'password'=>$data['password']]);
+                        return $model->id; // Devolver el ID de la nueva marca
+                    }),
                 ]),
                 Forms\Components\Select::make('customer_id')
                 ->options(Customer::pluck('name', 'id'))
@@ -114,7 +133,7 @@ class ServiceOrderResource extends Resource
                             $brand = Brand::create(['brand' => $data['brand']]);
                             return $brand->id; // Devolver el ID de la nueva marca
                         }),
-                        Forms\Components\Select::make('model_id')
+                Forms\Components\Select::make('model_id')
                         ->options(Models::pluck('model', 'id'))
                         ->label('Modelo')
                         ->required()
