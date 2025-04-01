@@ -49,7 +49,7 @@ class ServiceOrderResource extends Resource
                 ->required(),
                 Forms\Components\Grid::make(3)
                 ->schema([
-                    Forms\Components\TextInput::make('code')
+                    Forms\Components\TextInput::make('id')
                     ->label('Codigo')
                     ->required()
                     ->maxLength(255)
@@ -244,7 +244,7 @@ class ServiceOrderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('code')
+                TextColumn::make('id')
                     ->label('Código')
                     ->searchable(),
                 TextColumn::make('customer.name')
