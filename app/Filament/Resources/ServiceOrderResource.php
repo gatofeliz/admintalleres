@@ -53,7 +53,8 @@ class ServiceOrderResource extends Resource
                     ->label('Codigo')
                     ->required()
                     ->maxLength(255)
-                    ->default(uniqid()),
+                    ->default(fn () => str_pad((ServiceOrder::max('id') ?? 0) + 1, 6, '0', STR_PAD_LEFT))
+                    ->disabled(),
                     Forms\Components\DatePicker::make('date')
                     ->default(now())
                     ->label('Fecha')
