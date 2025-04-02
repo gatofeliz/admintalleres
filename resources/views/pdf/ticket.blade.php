@@ -167,7 +167,7 @@
         <p><strong>TOTAL REPARACIÓN: $</strong> {{$data->budget}}</p>
         <p><strong>REFACCIÓN: $</strong> {{$data->repair}}</p>
         <p><strong>ABONO: $</strong> {{$data->advance}}</p>
-        <p><strong>PENDIENTE DE PAGO: $</strong> {{$data->total}}</p>
+        <p><strong>PENDIENTE DE PAGO: $</strong> {{($data->budget-$data->advance)}}</p>
     </div>
     <div class="section">
         <p>* Políticas de garantía *</p>

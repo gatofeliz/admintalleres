@@ -218,22 +218,24 @@ class ServiceOrderResource extends Resource
                     ->label('Presupuesto')
                     ->required()
                     ->maxLength(255)
+                    ->live()
                     ->default(0),
                     Forms\Components\TextInput::make('repair')
                     ->label('Refacción')
                     ->required()
                     ->maxLength(255)
+                    ->live()
                     ->default(0),
                     Forms\Components\TextInput::make('advance')
                     ->label('Anticipo')
                     ->required()
                     ->maxLength(255)
+                    ->live()
                     ->default(0),
                     Forms\Components\TextInput::make('total')
                     ->label('Total')
                     ->required()
-                    ->maxLength(255)
-                    ->default(0),
+                    ,
             Forms\Components\FileUpload::make('photos')
                 ->image()
                 ->multiple()
