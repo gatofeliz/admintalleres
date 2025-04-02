@@ -351,7 +351,7 @@ class ServiceOrderResource extends Resource
                     
                     💰Valor Total: $ '.$record->budget.'
                     💲Abono1: $ '.$record->advance.'
-                    💸Saldo Pendiente: $ '.($data->budget-$data->advance).'
+                    💸Saldo Pendiente: $ '.($record->budget-$record->advance).'
 
                     📌Le informamos con todo gusto que su equipo ya se encuentra totalmente listo, ya puede acudir a nuestra sucursal a recogerlo acompañado con su hoja de remisión.🙌🏻
                     
