@@ -233,7 +233,7 @@ class ServiceOrderResource extends Resource
                     ->live()
                     ->default(0),
                     Forms\Components\TextInput::make('total')
-                    ->label('Total')
+                    ->label('Restante')
                     ->required()
                     ,
             Forms\Components\FileUpload::make('photos')
@@ -349,9 +349,9 @@ class ServiceOrderResource extends Resource
                     📝Diagnóstico: '.$record->diagnosis.'
                     💡Estado Actual: REPARADO
                     
-                    💰Valor Total: $ '.$record->total.'
+                    💰Valor Total: $ '.$record->budget.'
                     💲Abono1: $ '.$record->advance.'
-                    💸Saldo Pendiente: $ '.($record->total-$record->advance).'
+                    💸Saldo Pendiente: $ '.($data->budget-$data->advance).'
 
                     📌Le informamos con todo gusto que su equipo ya se encuentra totalmente listo, ya puede acudir a nuestra sucursal a recogerlo acompañado con su hoja de remisión.🙌🏻
                     
