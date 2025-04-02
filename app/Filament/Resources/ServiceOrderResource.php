@@ -218,7 +218,10 @@ class ServiceOrderResource extends Resource
                     ->label('Presupuesto')
                     ->required()
                     ->maxLength(255)
-                    ->live()
+                    ->reactive() // Hace el campo reactivo
+                    ->afterStateUpdated(fn ($state, $set, $get) => 
+                        $set('total', $state - $get('advance')) // Actualiza el total cuando cambia el presupuesto
+                    )
                     ->default(0),
                     Forms\Components\TextInput::make('repair')
                     ->label('Refacción')
@@ -230,11 +233,21 @@ class ServiceOrderResource extends Resource
                     ->label('Anticipo')
                     ->required()
                     ->maxLength(255)
-                    ->live()
+                    ->reactive() // Hace el campo reactivo
+                    ->afterStateUpdated(fn ($state, $set, $get) => 
+                        $set('total', $get('budget') - $state) // Actualiza el total cuando cambia el avance
+                    )
                     ->default(0),
                     Forms\Components\TextInput::make('total')
                     ->label('Restante')
                     ->required()
+                    ->default(function ($get) {
+                        // Calcula el total desde el principio con los valores iniciales de budget y advance
+                        return $get('budget') - $get('advance');
+                    })
+                    ->disabled()
+                 
+                    
                     ,
             Forms\Components\FileUpload::make('photos')
                 ->image()
