@@ -116,7 +116,7 @@
         <p><strong>Sábado:</strong> 9:00 am - 2:00 pm</p>
     </div>
     <div id="order" class="section">
-        <p>ORDEN Nº {{ $data->code }}</p>
+        <p>ORDEN Nº {{ $data->id }}</p>
     </div>
     <div class="section-content">
         <p><strong>FECHA:</strong> {{$data->created_at->format('d-m-Y')}} | <strong>HORA:</strong> {{$data->created_at->format('h:i:s A')}}</p>
